@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+int [0,9] cyfra;</declaration>
+	<template>
+		<name x="5" y="5">Template</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="0" y="0">
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-340">cyfra:=9</label>
+			<nail x="340" y="-340"/>
+			<nail x="-340" y="-340"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-306">cyfra:=8</label>
+			<nail x="306" y="-306"/>
+			<nail x="-306" y="-306"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-272">cyfra:=7</label>
+			<nail x="272" y="-272"/>
+			<nail x="-272" y="-272"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-238">cyfra:=6</label>
+			<nail x="238" y="-238"/>
+			<nail x="-238" y="-238"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-204">cyfra:=5</label>
+			<nail x="204" y="-204"/>
+			<nail x="-204" y="-204"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-170">cyfra:=4</label>
+			<nail x="170" y="-170"/>
+			<nail x="-170" y="-170"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-136">cyfra:=3</label>
+			<nail x="136" y="-136"/>
+			<nail x="-136" y="-136"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-102">cyfra:=2</label>
+			<nail x="102" y="-102"/>
+			<nail x="-102" y="-102"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-68">cyfra:=1</label>
+			<nail x="68" y="-68"/>
+			<nail x="-68" y="-68"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="-34" y="-34">cyfra:=0</label>
+			<nail x="34" y="-34"/>
+			<nail x="-34" y="-34"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+Process = Template();
+// List one or more processes to be composed into a system.
+system Process;
+    </system>
+	<queries>
+		<query>
+			<formula></formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

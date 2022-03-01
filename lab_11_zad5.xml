@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+
+bool pin;
+
+int [0,150] kwota;
+int [0,2147483647] stanKonta = 100; 
+
+chan czekajNaKarte;
+chan czekajNaPIN;
+chan czekajNaKwote;
+chan czekajNaPieniadze;
+
+chan sprawdzPIN;
+chan sprawdzStanKonta;
+chan wyplac;
+
+chan wyswietlBlad;
+chan potwierdzPIN;
+chan potwierdzenie;</declaration>
+	<template>
+		<name x="5" y="5">Klient</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-34" y="0">
+			<name x="-161" y="-8">WlozonoKarte</name>
+		</location>
+		<location id="id1" x="68" y="-204">
+			<name x="-34" y="-212">PodanoPIN</name>
+		</location>
+		<location id="id2" x="374" y="-204">
+			<name x="399" y="-212">PodanoKwote</name>
+		</location>
+		<location id="id3" x="374" y="204">
+			<name x="399" y="195">PobranoPieniadze</name>
+		</location>
+		<location id="id4" x="68" y="204">
+			<name x="-59" y="195">ZabranoKarte</name>
+		</location>
+		<location id="id5" x="204" y="0">
+			<name x="194" y="-34">Blad</name>
+		</location>
+		<init ref="id4"/>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="42" y="25">czekajNaKarte!</label>
+			<label kind="comments" x="42" y="51">Klient zabiera
+karte</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="212" y="17">wyswietlBlad?</label>
+			<label kind="comments" x="212" y="42">Wyswietlenie bledu 
+z powodu
+braku srodkow</label>
+			<nail x="306" y="-136"/>
+			<nail x="306" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="85" y="-170">wyswietlBlad?</label>
+			<label kind="comments" x="85" y="-144">Wyswietlenie bledu 
+po podaniu
+blednego pinu</label>
+			<nail x="68" y="-34"/>
+			<nail x="102" y="0"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="select" x="68" y="-289">i: int[1,150]</label>
+			<label kind="synchronisation" x="68" y="-255">czekajNaKwote!</label>
+			<label kind="assignment" x="68" y="-272">kwota:=i</label>
+			<label kind="comments" x="221" y="-297">Klient podaje kwote
+po podaniu poprawnego 
+kodu PIN</label>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id0"/>
+			<label kind="comments" x="-110" y="93">Klient
+wklada karte</label>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="synchronisation" x="170" y="212">czekajNaKarte!</label>
+			<label kind="comments" x="170" y="161">Klient zabiera
+pieniadze i karte</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="382" y="-161">potwierdzenie?</label>
+			<label kind="comments" x="382" y="-136">Klient otrzymuje 
+pieniadze</label>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="select" x="-127" y="-170">i: int[0, 1]</label>
+			<label kind="synchronisation" x="-127" y="-136">czekajNaPIN!</label>
+			<label kind="assignment" x="-127" y="-153">pin:=i</label>
+			<label kind="comments" x="-127" y="-110">Klient podaje PIN</label>
+		</transition>
+	</template>
+	<template>
+		<name>Bankomat</name>
+		<location id="id6" x="-136" y="-340">
+			<name x="-306" y="-348">OczekiwanieNaKarte</name>
+		</location>
+		<location id="id7" x="-136" y="-204">
+			<name x="-297" y="-212">OczekiwanieNaPIN</name>
+		</location>
+		<location id="id8" x="272" y="-204">
+			<name x="297" y="-212">OczekiwanieNaKwote</name>
+		</location>
+		<location id="id9" x="68" y="-340">
+			<name x="-8" y="-374">ZwrotKarty</name>
+		</location>
+		<location id="id10" x="272" y="-340">
+			<name x="297" y="-348">OczekiwanieNaSprawdzenieStanuKonta</name>
+		</location>
+		<location id="id11" x="68" y="-204">
+			<name x="-26" y="-179">OczekiwanieNaWeryfikacjePIN</name>
+		</location>
+		<location id="id12" x="170" y="-476">
+			<name x="102" y="-510">WyplaceniePieniedzy</name>
+		</location>
+		<location id="id13" x="170" y="-68">
+			<name x="110" y="-51">PotwierdzonyPIN</name>
+		</location>
+		<init ref="id6"/>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id8"/>
+			<label kind="synchronisation" x="229" y="-136">czekajNaKwote?</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id13"/>
+			<label kind="synchronisation" x="25" y="-136">potwierdzPIN?</label>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="25" y="-433">potwierdzenie!</label>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="-85" y="-357">czekajNaKarte?</label>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="76" y="-280">wyswietlBlad!</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id9"/>
+			<label kind="synchronisation" x="127" y="-357">wyswietlBlad!</label>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id12"/>
+			<label kind="synchronisation" x="221" y="-433">wyplac?</label>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id10"/>
+			<label kind="synchronisation" x="280" y="-280">sprawdzStanKonta!</label>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id11"/>
+			<label kind="synchronisation" x="-76" y="-221">sprawdzPIN!</label>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="-238" y="-280">czekajNaPIN?</label>
+		</transition>
+	</template>
+	<template>
+		<name>Bank</name>
+		<location id="id14" x="0" y="0">
+			<name x="-76" y="110">OczekiwanieNaBankomat</name>
+		</location>
+		<location id="id15" x="204" y="0">
+			<name x="221" y="-8">WyplacaniePieniedzy</name>
+			<committed/>
+		</location>
+		<location id="id16" x="-229" y="0">
+			<name x="-340" y="-8">PotwierdzPIN</name>
+			<committed/>
+		</location>
+		<init ref="id14"/>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="-178" y="-85">potwierdzPIN!</label>
+			<nail x="-127" y="-68"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id16"/>
+			<label kind="guard" x="-144" y="-17">pin==true</label>
+			<label kind="synchronisation" x="-144" y="8">sprawdzPIN?</label>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id14"/>
+			<label kind="synchronisation" x="76" y="85">wyplac!</label>
+			<label kind="assignment" x="51" y="68">stanKonta-=kwota</label>
+			<nail x="102" y="68"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id15"/>
+			<label kind="guard" x="42" y="-25">kwota&lt;stanKonta</label>
+			<label kind="synchronisation" x="42" y="0">sprawdzStanKonta?</label>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id14"/>
+			<label kind="guard" x="0" y="-144">kwota&gt;stanKonta</label>
+			<label kind="synchronisation" x="0" y="-127">sprawdzStanKonta?</label>
+			<nail x="0" y="-102"/>
+			<nail x="68" y="-68"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id14"/>
+			<label kind="guard" x="-170" y="51">pin==false</label>
+			<label kind="synchronisation" x="-170" y="68">sprawdzPIN?</label>
+			<nail x="0" y="102"/>
+			<nail x="-68" y="68"/>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+
+// List one or more processes to be composed into a system.
+system Klient, Bankomat, Bank;
+    </system>
+	<queries>
+		<query>
+			<formula></formula>
+			<comment></comment>
+		</query>
+	</queries>
+</nta>

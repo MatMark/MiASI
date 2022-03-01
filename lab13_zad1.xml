@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+chan connect;
+broadcast chan session[4];
+broadcast chan disconnect[4];
+int [1,3] id;</declaration>
+	<template>
+		<name x="5" y="5">Serwer</name>
+		<declaration>// Place local declarations here.</declaration>
+		<location id="id0" x="-442" y="-272">
+			<name x="-459" y="-306">FREE</name>
+		</location>
+		<location id="id1" x="-272" y="-272">
+			<name x="-289" y="-306">BUSY</name>
+		</location>
+		<init ref="id0"/>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="synchronisation" x="-399" y="-221">session[id]!</label>
+			<nail x="-272" y="-204"/>
+			<nail x="-442" y="-204"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="synchronisation" x="-391" y="-289">connect!</label>
+		</transition>
+	</template>
+	<template>
+		<name>Klient</name>
+		<parameter>const int [1,3] n</parameter>
+		<declaration>clock time;
+int [1,20] t1;</declaration>
+		<location id="id2" x="0" y="0">
+			<name x="-51" y="-34">DISCONNECTED</name>
+		</location>
+		<location id="id3" x="238" y="0">
+			<name x="195" y="-34">CONNECTING</name>
+		</location>
+		<location id="id4" x="442" y="0">
+			<name x="467" y="-8">CONNECTED</name>
+		</location>
+		<location id="id5" x="-204" y="0">
+			<name x="-340" y="-8">DISCONNECTING</name>
+		</location>
+		<init ref="id2"/>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="synchronisation" x="68" y="85">disconnect[n]?</label>
+			<label kind="assignment" x="68" y="102">time:=0</label>
+			<nail x="442" y="102"/>
+			<nail x="-204" y="102"/>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id2"/>
+			<label kind="assignment" x="-161" y="0">time:=0</label>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="guard" x="68" y="-136">time&gt;=t1</label>
+			<label kind="synchronisation" x="68" y="-119">disconnect[n]!</label>
+			<label kind="assignment" x="68" y="-102">time:=0</label>
+			<nail x="442" y="-102"/>
+			<nail x="-204" y="-102"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="select" x="297" y="-34">x:int[1,19]</label>
+			<label kind="synchronisation" x="297" y="-17">session[n]?</label>
+			<label kind="assignment" x="297" y="0">t1=x, time:=0</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="synchronisation" x="68" y="-17">connect?</label>
+			<label kind="assignment" x="68" y="0">id:=n, time:=0</label>
+		</transition>
+	</template>
+	<template>
+		<name>Sesja</name>
+		<parameter>const int [1,3] n</parameter>
+		<declaration>clock time;
+int [1,20] t2 = 20;</declaration>
+		<location id="id6" x="0" y="0">
+			<name x="-136" y="-8">DISCONNECTED</name>
+		</location>
+		<location id="id7" x="204" y="0">
+			<name x="221" y="-8">CONNECTED</name>
+			<label kind="invariant" x="221" y="8">time&lt;=t2</label>
+		</location>
+		<init ref="id6"/>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="synchronisation" x="51" y="85">disconnect[n]?</label>
+			<label kind="assignment" x="51" y="102">time:=0</label>
+			<nail x="204" y="102"/>
+			<nail x="0" y="102"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id6"/>
+			<label kind="guard" x="51" y="-136">time==t2</label>
+			<label kind="synchronisation" x="51" y="-119">disconnect[n]!</label>
+			<label kind="assignment" x="51" y="-102">time:=0</label>
+			<nail x="204" y="-102"/>
+			<nail x="0" y="-102"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="synchronisation" x="68" y="-17">session[n]?</label>
+			<label kind="assignment" x="68" y="0">time:=0</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+// List one or more processes to be composed into a system.
+system Serwer, Klient, Sesja;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] forall (i:int[1,3]) forall (j:int[1,3]) (Klient(i).CONNECTING and Klient(j).CONNECTING) imply i==j</formula>
+			<comment>+</comment>
+		</query>
+		<query>
+			<formula>Klient(1).CONNECTED --&gt; (Klient(1).DISCONNECTED and (Klient(1).time &lt; Klient(1).t1))</formula>
+			<comment>+</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; forall(i:int[1,3]) Klient(i).CONNECTED and Sesja(i).CONNECTED and Klient(i).time&gt;20</formula>
+			<comment>+</comment>
+		</query>
+		<query>
+			<formula>Klient(1).CONNECTED --&gt; Klient(1).DISCONNECTING
+</formula>
+			<comment>+</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; exists (i:int[1,3]) Klient(i).CONNECTED and Klient(i).t1==20</formula>
+			<comment>+</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; forall(i:int[1,3]) Klient(i).CONNECTED and Sesja(i).CONNECTED</formula>
+			<comment>+</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; forall(i:int[1,3]) Klient(i).CONNECTING</formula>
+			<comment>+</comment>
+		</query>
+	</queries>
+</nta>

@@ -1,0 +1,40 @@
+MODULE main
+VAR number : 0..9;
+    state : {s0,s1,s2,s3,s4};
+    open : boolean;
+INIT state = s0 &
+     open = FALSE;
+TRANS next(number) in 0..9;
+TRANS open in case
+	state = s4 : TRUE;
+	state in {s0,s1,s2,s3}: FALSE;
+	esac;
+TRANS next(state) in case
+	(state = s0 & next(number)!=1) : s0;
+	(state = s0 & next(number)=1) : s1;
+	(state = s1 & next(number)=1) : s1;
+	(state = s1 & next(number) in {0,3,4,5,6,7,8,9}) : s0;
+	(state = s1 & next(number)=2) : s2;
+	(state = s2 & next(number)=1) : s1;
+	(state = s2 & next(number) in {0,2,4,5,6,7,8,9}) : s0;
+	(state = s2 & next(number)=3) : s3;
+	(state = s3 & next(number)=1) : s1;
+	(state = s3 & next(number) in {0,2,3,5,6,7,8,9}) : s0;
+	(state = s3 & next(number)=4) : s4;
+	TRUE :s0;
+	esac;
+
+-- Czy number jest zawsze w zakresie 0-9
+CTLSPEC AG(number in 0..9) -- true
+
+-- Czy zamek jest zawsze zamknięty w stanach s0, s1, s2, s3 
+CTLSPEC AG(state in {s0, s1, s2, s3} -> open = FALSE) -- true
+
+-- Czy zamek zawsze otwiera się w stanie s4
+CTLSPEC AG(state = s4 -> open = TRUE) -- true
+
+-- Czy zamek może zostać otwarty
+CTLSPEC EF(open = TRUE) -- true
+
+-- Czy sekwencja 1234 otwiera zamek?
+CTLSPEC AG(AG(AG(AG(state = s0 & number = 1 -> state = s1) & number = 2 -> state = s2) & number = 3 -> state = s3) & number = 4 -> state = s4 & open) -- true

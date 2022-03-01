@@ -1,0 +1,52 @@
+[comment encoding = UTF-8 /]
+[module interfejsy('http://www.eclipse.org/uml2/5.0.0/UML', 'http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard')]
+
+[import test2Acceleo::common::sekwencje /]
+[import test2Acceleo::common::aktywnosci/]
+
+[template public generateInterface(i : Interface)]
+[file (i.interfaceName(), false, 'UTF-8')]
+package [i.containingPackages().name->sep('.')/];
+
+interface [i.name/] [i.ext()/]
+ {
+// Atrybuty:
+	[for (it : Property | i.ownedAttribute)]
+	[it.visibility/] [it.type.name/]	[it.name/];
+	[/for]
+// Getters & Setters:
+	[for (it : Property | i.ownedAttribute)]
+	[it.visibility/] [it.type.name/]	get[it.name/]() { return [it.name/]; }
+	[it.visibility/] void set[it.name/]([it.type.name/] w) { [it.name/] = w; }
+	[/for]
+// Operacje:	
+	[for (op : Operation | i.ownedOperation)]
+		[if (op.type.oclIsUndefined())]
+		[op.visibility/] void [else]	[op.visibility/] [op.type.name/] [/if] [op.name/] ();	
+	[/for]
+	
+};
+[/file]
+[/template]
+
+[template public ext (aClass : Interface)? (not aClass.allParents()->isEmpty())]
+ extends [aClass.allParents().name->sep(', ')/]
+[/template]
+
+[template public imp (aClass : Class) ]
+[if (aClass.getAllImplementedInterfaces()->notEmpty())] 
+ implements [aClass.getAllImplementedInterfaces().name->sep(', ')/]
+[/if]
+[/template]
+
+[query public interfaceName (aClass : Interface) : String = 
+ aClass.qualifiedName().replaceAll('\\.','/').concat('.java')
+ /]
+
+[query public qualifiedName (aClass : Interface) : String = 
+ aClass.containingPackages().name->sep('.')->including('.')->including(aClass.name)->toString()
+ /]
+
+[query public containingPackages (aClass : Interface) : Sequence(Package) = 
+ aClass.ancestors(Package)->reject(oclIsKindOf(Model))->reverse()
+ /]

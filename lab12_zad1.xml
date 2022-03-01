@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+chan wlacz;
+chan wylacz;</declaration>
+	<template>
+		<name x="5" y="5">Czas</name>
+		<declaration>// Place local declarations here.
+clock minuta;</declaration>
+		<location id="id0" x="-272" y="-612">
+			<name x="-282" y="-646">G12</name>
+			<label kind="invariant" x="-323" y="-595">minuta&lt;=60</label>
+		</location>
+		<location id="id1" x="-102" y="-544">
+			<name x="-112" y="-578">G13</name>
+			<label kind="invariant" x="-187" y="-527">minuta&lt;=60</label>
+		</location>
+		<location id="id2" x="17" y="-425">
+			<name x="7" y="-459">G14</name>
+			<label kind="invariant" x="-102" y="-425">minuta&lt;=60</label>
+		</location>
+		<location id="id3" x="68" y="-272">
+			<name x="58" y="-306">G15</name>
+			<label kind="invariant" x="-51" y="-272">minuta&lt;=60</label>
+		</location>
+		<location id="id4" x="17" y="-119">
+			<name x="7" y="-153">G16</name>
+			<label kind="invariant" x="-102" y="-136">minuta&lt;=60</label>
+		</location>
+		<location id="id5" x="-102" y="0">
+			<name x="-112" y="-34">G17</name>
+			<label kind="invariant" x="-170" y="-51">minuta&lt;=60</label>
+		</location>
+		<location id="id6" x="-272" y="68">
+			<name x="-282" y="34">G18</name>
+			<label kind="invariant" x="-323" y="17">minuta&lt;=60</label>
+		</location>
+		<location id="id7" x="-442" y="0">
+			<name x="-452" y="-34">G19</name>
+			<label kind="invariant" x="-476" y="-51">minuta&lt;=60</label>
+		</location>
+		<location id="id8" x="-561" y="-119">
+			<name x="-571" y="-153">G20</name>
+			<label kind="invariant" x="-527" y="-136">minuta&lt;=60</label>
+		</location>
+		<location id="id9" x="-612" y="-272">
+			<name x="-622" y="-306">G21</name>
+			<label kind="invariant" x="-595" y="-289">minuta&lt;=60</label>
+		</location>
+		<location id="id10" x="-561" y="-425">
+			<name x="-571" y="-459">G22</name>
+			<label kind="invariant" x="-544" y="-425">minuta&lt;=60</label>
+		</location>
+		<location id="id11" x="-442" y="-544">
+			<name x="-452" y="-578">G23</name>
+			<label kind="invariant" x="-452" y="-527">minuta&lt;=60</label>
+		</location>
+		<location id="id12" x="-272" y="-748">
+			<name x="-282" y="-782">G0</name>
+			<label kind="invariant" x="-272" y="-799">minuta&lt;=60</label>
+		</location>
+		<location id="id13" x="-34" y="-680">
+			<name x="-44" y="-714">G1</name>
+			<label kind="invariant" x="-17" y="-697">minuta&lt;=60</label>
+		</location>
+		<location id="id14" x="136" y="-510">
+			<name x="126" y="-544">G2</name>
+			<label kind="invariant" x="153" y="-527">minuta&lt;=60</label>
+		</location>
+		<location id="id15" x="204" y="-272">
+			<name x="194" y="-306">G3</name>
+			<label kind="invariant" x="221" y="-306">minuta&lt;=60</label>
+		</location>
+		<location id="id16" x="136" y="-34">
+			<name x="126" y="-68">G4</name>
+			<label kind="invariant" x="170" y="-68">minuta&lt;=60</label>
+		</location>
+		<location id="id17" x="-34" y="136">
+			<name x="-44" y="102">G5</name>
+			<label kind="invariant" x="-17" y="136">minuta&lt;=60</label>
+		</location>
+		<location id="id18" x="-272" y="204">
+			<name x="-282" y="170">G6</name>
+			<label kind="invariant" x="-323" y="221">minuta&lt;=60</label>
+		</location>
+		<location id="id19" x="-510" y="-680">
+			<name x="-520" y="-714">G11</name>
+			<label kind="invariant" x="-612" y="-731">minuta&lt;=60</label>
+		</location>
+		<location id="id20" x="-680" y="-510">
+			<name x="-690" y="-544">G10</name>
+			<label kind="invariant" x="-799" y="-527">minuta&lt;=60</label>
+		</location>
+		<location id="id21" x="-748" y="-272">
+			<name x="-758" y="-306">G9</name>
+			<label kind="invariant" x="-867" y="-306">minuta&lt;=60</label>
+		</location>
+		<location id="id22" x="-680" y="-34">
+			<name x="-690" y="-68">G8</name>
+			<label kind="invariant" x="-816" y="-68">minuta&lt;=60</label>
+		</location>
+		<location id="id23" x="-510" y="136">
+			<name x="-520" y="102">G7_1</name>
+			<label kind="invariant" x="-561" y="153">minuta&gt;=10</label>
+		</location>
+		<location id="id24" x="-739" y="161">
+			<name x="-749" y="127">G7A</name>
+			<label kind="invariant" x="-960" y="178">minuta&lt;=15 &amp;&amp; minuta&gt;=10</label>
+		</location>
+		<location id="id25" x="-595" y="68">
+			<name x="-605" y="34">G7_2</name>
+			<label kind="invariant" x="-646" y="85">minuta&lt;=60</label>
+		</location>
+		<init ref="id12"/>
+		<transition>
+			<source ref="id25"/>
+			<target ref="id22"/>
+			<label kind="guard" x="-816" y="-17">minuta==60</label>
+			<label kind="assignment" x="-816" y="0">minuta:=0</label>
+		</transition>
+		<transition>
+			<source ref="id24"/>
+			<target ref="id25"/>
+			<label kind="guard" x="-748" y="68">minuta==15</label>
+			<label kind="synchronisation" x="-748" y="85">wylacz!</label>
+		</transition>
+		<transition>
+			<source ref="id23"/>
+			<target ref="id24"/>
+			<label kind="guard" x="-714" y="221">minuta==10</label>
+			<label kind="synchronisation" x="-714" y="238">wlacz!</label>
+			<nail x="-697" y="212"/>
+		</transition>
+		<transition>
+			<source ref="id11"/>
+			<target ref="id12"/>
+			<label kind="guard" x="-391" y="-578">minuta==60</label>
+			<label kind="assignment" x="-391" y="-561">minuta:=0</label>
+			<nail x="-357" y="-595"/>
+			<nail x="-306" y="-612"/>
+			<nail x="-272" y="-680"/>
+		</transition>
+		<transition>
+			<source ref="id10"/>
+			<target ref="id11"/>
+			<label kind="guard" x="-493" y="-493">minuta==60</label>
+			<label kind="assignment" x="-493" y="-476">minuta:=0</label>
+			<nail x="-510" y="-493"/>
+		</transition>
+		<transition>
+			<source ref="id9"/>
+			<target ref="id10"/>
+			<label kind="guard" x="-561" y="-391">minuta==60</label>
+			<label kind="assignment" x="-561" y="-374">minuta:=0</label>
+			<nail x="-595" y="-357"/>
+		</transition>
+		<transition>
+			<source ref="id8"/>
+			<target ref="id9"/>
+			<label kind="guard" x="-578" y="-238">minuta==60</label>
+			<label kind="assignment" x="-578" y="-221">minuta:=0</label>
+			<nail x="-595" y="-187"/>
+		</transition>
+		<transition>
+			<source ref="id7"/>
+			<target ref="id8"/>
+			<label kind="guard" x="-527" y="-102">minuta==60</label>
+			<label kind="assignment" x="-527" y="-85">minuta:=0</label>
+			<nail x="-510" y="-51"/>
+		</transition>
+		<transition>
+			<source ref="id6"/>
+			<target ref="id7"/>
+			<label kind="guard" x="-408" y="-17">minuta==60</label>
+			<label kind="assignment" x="-408" y="0">minuta:=0</label>
+			<nail x="-357" y="51"/>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id6"/>
+			<label kind="guard" x="-221" y="-17">minuta==60</label>
+			<label kind="assignment" x="-221" y="0">minuta:=0</label>
+			<nail x="-187" y="51"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id5"/>
+			<label kind="guard" x="-102" y="-102">minuta==60</label>
+			<label kind="assignment" x="-102" y="-85">minuta:=0</label>
+			<nail x="-34" y="-51"/>
+		</transition>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-51" y="-238">minuta==60</label>
+			<label kind="assignment" x="-51" y="-221">minuta:=0</label>
+			<nail x="51" y="-187"/>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-68" y="-391">minuta==60</label>
+			<label kind="assignment" x="-68" y="-374">minuta:=0</label>
+			<nail x="51" y="-357"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id2"/>
+			<label kind="guard" x="-153" y="-493">minuta==60</label>
+			<label kind="assignment" x="-153" y="-476">minuta:=0</label>
+			<nail x="-34" y="-493"/>
+		</transition>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-255" y="-578">minuta==60</label>
+			<label kind="assignment" x="-255" y="-561">minuta:=0</label>
+			<nail x="-187" y="-595"/>
+		</transition>
+		<transition>
+			<source ref="id19"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-476" y="-782">minuta==60</label>
+			<label kind="assignment" x="-476" y="-765">minuta:=0</label>
+			<nail x="-408" y="-731"/>
+			<nail x="-306" y="-748"/>
+		</transition>
+		<transition>
+			<source ref="id20"/>
+			<target ref="id19"/>
+			<label kind="guard" x="-680" y="-680">minuta==60</label>
+			<label kind="assignment" x="-680" y="-663">minuta:=0</label>
+			<nail x="-612" y="-612"/>
+		</transition>
+		<transition>
+			<source ref="id21"/>
+			<target ref="id20"/>
+			<label kind="guard" x="-884" y="-442">minuta==60</label>
+			<label kind="assignment" x="-884" y="-425">minuta:=0</label>
+			<nail x="-731" y="-408"/>
+		</transition>
+		<transition>
+			<source ref="id22"/>
+			<target ref="id21"/>
+			<label kind="guard" x="-884" y="-170">minuta==60</label>
+			<label kind="assignment" x="-884" y="-153">minuta:=0</label>
+			<nail x="-731" y="-136"/>
+		</transition>
+		<transition>
+			<source ref="id18"/>
+			<target ref="id23"/>
+			<label kind="guard" x="-476" y="204">minuta==60</label>
+			<label kind="assignment" x="-476" y="221">minuta:=0</label>
+			<nail x="-408" y="187"/>
+		</transition>
+		<transition>
+			<source ref="id17"/>
+			<target ref="id18"/>
+			<label kind="guard" x="-136" y="204">minuta==60</label>
+			<label kind="assignment" x="-136" y="221">minuta:=0</label>
+			<nail x="-136" y="187"/>
+		</transition>
+		<transition>
+			<source ref="id16"/>
+			<target ref="id17"/>
+			<label kind="guard" x="170" y="-17">minuta==60</label>
+			<label kind="assignment" x="170" y="0">minuta:=0</label>
+			<nail x="68" y="68"/>
+		</transition>
+		<transition>
+			<source ref="id15"/>
+			<target ref="id16"/>
+			<label kind="guard" x="238" y="-170">minuta==60</label>
+			<label kind="assignment" x="238" y="-153">minuta:=0</label>
+			<nail x="187" y="-153"/>
+		</transition>
+		<transition>
+			<source ref="id14"/>
+			<target ref="id15"/>
+			<label kind="guard" x="238" y="-442">minuta==60</label>
+			<label kind="assignment" x="238" y="-425">minuta:=0</label>
+			<nail x="187" y="-408"/>
+		</transition>
+		<transition>
+			<source ref="id13"/>
+			<target ref="id14"/>
+			<label kind="guard" x="68" y="-680">minuta==60</label>
+			<label kind="assignment" x="68" y="-663">minuta:=0</label>
+			<nail x="68" y="-612"/>
+		</transition>
+		<transition>
+			<source ref="id12"/>
+			<target ref="id13"/>
+			<label kind="guard" x="-170" y="-782">minuta==60</label>
+			<label kind="assignment" x="-170" y="-765">minuta:=0</label>
+			<nail x="-136" y="-731"/>
+		</transition>
+	</template>
+	<template>
+		<name>Alarm</name>
+		<location id="id26" x="0" y="0">
+			<name x="-10" y="-34">CISZA</name>
+		</location>
+		<location id="id27" x="102" y="0">
+			<name x="92" y="-34">ALARM</name>
+		</location>
+		<init ref="id26"/>
+		<transition>
+			<source ref="id27"/>
+			<target ref="id26"/>
+			<label kind="synchronisation" x="10" y="59">wylacz?</label>
+			<nail x="102" y="76"/>
+			<nail x="0" y="76"/>
+		</transition>
+		<transition>
+			<source ref="id26"/>
+			<target ref="id27"/>
+			<label kind="synchronisation" x="18" y="-17">wlacz?</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+// List one or more processes to be composed into a system.
+system Alarm, Czas;
+    </system>
+	<queries>
+		<query>
+			<formula>A[] Alarm.CISZA</formula>
+			<comment>Czy alarm może być stale wylaczony
+
+Bezpieczenstwo
+AG Alarm.CISZA</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Alarm.ALARM</formula>
+			<comment>Czy alarm bedzie kiedys wlaczony
+
+Osiagalnosc
+AF Alarm.ALARM</comment>
+		</query>
+		<query>
+			<formula>A&lt;&gt; Czas.minuta == 60 </formula>
+			<comment>Czy godzina trwa 60 minut
+
+AF Czas.minuta == 60</comment>
+		</query>
+		<query>
+			<formula>Czas.G1 --&gt; Czas.minuta==0</formula>
+			<comment>Jesli stan G1 zostanie osiagniety to doprowadzi to do osiagniecia minuta==0
+
+Zywotnosc
+AG(Czas.G1 --&gt; AF Czas.minuta==0)</comment>
+		</query>
+		<query>
+			<formula>E&lt;&gt; Alarm.ALARM and ((Czas.minuta &gt;15 or Czas.minuta &lt;10) and (Czas.G7_1 or Czas.G7_2 or Czas.G7A) or (!Czas.G7A and !Czas.G7_1 and !Czas.G7_2))</formula>
+			<comment>Czy istnieje kiedyś stan w którym alarm jest włączony i minuty nie należą do przedziału [10,15], 
+oraz stan G7_1, G7_2 lub G7A jest aktywny (godzina 7 ale inne minuty) lub alarm jest wlaczony, 
+ale zaden z tych stanow nie jest aktywny: {G7A, Czas.G7_1, Czas.G7_2} (inna godzina niz 7)
+
+EF Alarm.ALARM /\ ((Czas.minuta &gt; 15 \/ Czas.minuta &lt;10) /\ (Czas.G7_1 \/ Czas.G7_2 \/ Czas.G7A) \/ (~Czas.G7A /\ ~Czas.G7_1 /\ ~Czas.G7_2))
+
+(czy alarm trwa od 7:10 do 7:15 i tylko wtedy)</comment>
+		</query>
+	</queries>
+</nta>

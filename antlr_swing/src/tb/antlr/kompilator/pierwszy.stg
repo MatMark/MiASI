@@ -1,0 +1,39 @@
+group pierwszy;
+
+int(i,j) ::= <<
+MOV A,#<i> ; po raz <j>
+
+>>
+
+dodaj(p1, p2) ::= <<
+<p2> 
+PUSH A ; A na stos
+<p1>
+POP B ; sciagam l ze stosu do B
+ADD A, B ; dodaj A i B
+>>
+odejmij(p1, p2) ::= <<
+<p2> 
+PUSH A ; A na stos
+<p1>
+POP B ; sciagam l ze stosu do B
+SUB A, B ; odejmij A i B
+>>
+pomnoz(p1, p2) ::= <<
+<p2> 
+PUSH A ; A na stos
+<p1>
+POP B ; sciagam l ze stosu do B
+MUL A, B ; pomnoz A i B
+>>
+podziel(p1, p2) ::= <<
+<p2> 
+PUSH A ; A na stos
+<p1>
+POP B ; sciagam zm ze stosu do B
+DIV A, B ; podziel A i B
+>>
+
+dek(n) ::= <<
+DD <n>
+>>

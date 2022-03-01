@@ -1,0 +1,23 @@
+int number, i = 1, factorial = 1, sigma = 0, primes;                e0 - inicjacja zmiennych - pomijane
+cin >> number;                                                      e0 - inicjacja zmiennych - pomijane
+if(number > 2)                                                      e1
+{
+    for(int j = 3; j <= number; j++)                                e2
+    {
+        factorial = 1;                                              e3
+        i = 1;                                                      e3
+        for(int x = 0; x < j - 2; x++)                              e4
+        {
+            factorial = factorial * i;                              e5
+            i++;                                                    e6
+        }
+        sigma = sigma + (factorial - j * (factorial / j));          e7
+    }
+    primes = -1 + sigma;                                            e8
+    if(number == 3)                                                 e9
+        cout << 2;                                                  e10
+    else
+        cout << primes;                                             e11
+}
+else
+    cout << ”wrong number”;                                         e12
